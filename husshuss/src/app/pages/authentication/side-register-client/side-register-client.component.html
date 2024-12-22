@@ -51,12 +51,12 @@
 
           <div class="or-border m-t-30">or sign up with</div>
 
-          <form class="m-t-30"  [formGroup]="registerForm" (ngSubmit)="submit()">
+          <form class="m-t-30"  [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
               >Name</mat-label
             >
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput formControlName="FullName" placeholder="Entrez votre nom complet" required>
+              <input matInput formControlName="fullName" placeholder="Entrez votre nom complet" required>
  
             </mat-form-field>
 
@@ -64,26 +64,26 @@
               >Email Adddress</mat-label
             >
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput formControlName="Email" placeholder="Entrez votre email" type="email" required>
+              <input matInput formControlName="email" placeholder="Entrez votre email" type="email" required>
             </mat-form-field>
             <!-- password -->
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
               >Password</mat-label
             >
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput formControlName="Password" placeholder="Entrez votre mot de passe" type="password" required>
+              <input matInput formControlName="password" placeholder="Entrez votre mot de passe" type="password" required>
             </mat-form-field>
              <!-- confirmation -->
              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
              >Confirme your Password</mat-label
            >
            <mat-form-field appearance="outline" class="w-100" color="primary">
-             <input matInput formControlName="ConfirmPassword" placeholder="Confirmez votre mot de passe" type="password" required>
+             <input matInput formControlName="confirmPassword" placeholder="Confirmez votre mot de passe" type="password" required>
            </mat-form-field>
                       
            <mat-form-field>
             <mat-label>Profile Type</mat-label>
-            <select matNativeControl required formControlName="UserType">
+            <select matNativeControl required formControlName="userType">
               <option value="Influenceur">Influenceur</option>
               <option value="Client">Client</option>
             </select>

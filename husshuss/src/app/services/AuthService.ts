@@ -11,6 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+
   // Méthode pour s'inscrire
   register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/register`, user);
@@ -19,5 +20,10 @@ export class AuthService {
   // Méthode pour se connecter
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/login`, credentials);
+  }
+  
+  // Méthode pour s'inscrire
+  inflencers(inflencers: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/inflencers`, inflencers);
   }
 }

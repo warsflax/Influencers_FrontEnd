@@ -8,7 +8,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Starter',
       urls: [
-        { title: 'Dashboard', url: '/dashboard' },
+        { title: 'Login', url: '/authentication/login' },
         { title: 'Starter' },
       ],
     },

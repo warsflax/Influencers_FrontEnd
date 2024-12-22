@@ -14,12 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../../services/AuthService';
 
 @Component({
-  selector: 'app-side-register',
+  selector: 'app-side-register-client',
   standalone: true,
   imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './side-register.component.html',
+  templateUrl: './side-register-client.component.html',
+  styleUrl: './side-register-client.component.scss'
 })
-export class AppSideRegisterComponent {
+export class SideRegisterClientComponent {
+
   registerForm: FormGroup;
 
   constructor(
@@ -29,58 +31,47 @@ export class AppSideRegisterComponent {
   ) {
     this.registerForm = this.form.group({
       
-      Email: ['', [Validators.required, Validators.email]],
-      Password: ['', [Validators.required, Validators.minLength(6)]],
-      ConfirmPassword: ['', [Validators.required]],
-      FullName : ['',[Validators.required]] , 
-      UserType : ['',[Validators.required]] 
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]],
+      fullName : ['',[Validators.required]] , 
+      userType : ['',[Validators.required]] 
     });
   }
 
 
-  submit() {
+  onSubmit() {
     
     if (this.registerForm.valid) {
-      const { Email, Password, ConfirmPassword, UserType, FullName} = this.registerForm.value;
-      debugger
-      console.log(Password)
-      console.log(ConfirmPassword)
+      const { email, password, confirmPassword, userType, fullName} = this.registerForm.value;
 
       // Vérifier si le mot de passe et la confirmation correspondent
-      if (Password != ConfirmPassword) {
+      if (password !== confirmPassword) {
         alert("Les mots de passe ne correspondent pas");
         return;
       }
 
       // Définir les valeurs par défaut pour les champs supplémentaires
-      const ProfilePicture = 'https://example.com/default-profile.jpg'; // URL de profil par défaut
-      const DateJoined = new Date(); // Date actuelle pour la date d'inscription
+      const profilePicture = 'https://example.com/default-profile.jpg'; // URL de profil par défaut
+      const dateJoined = new Date(); // Date actuelle pour la date d'inscription
 
       // Créer un objet utilisateur avec tous les champs requis
       const user = {
-        Email,
-        Password,
-        UserType,
-        FullName,
-        ProfilePicture,
-        DateJoined
-      }; 		
-      // Stocker une donnée
-      sessionStorage.setItem('email', Email);
+        email,
+        password,
+        userType,
+        fullName,
+        profilePicture,
+        dateJoined
+      };
 
       // Appeler le service d'enregistrement avec l'objet complet
       this.authService.register(user).subscribe(
         response => {
           console.log('Inscription réussie', response);
           alert('Inscription réussie');
-          if(UserType=="Influenceur"){
-          this.router.navigate(['/authentication/register-influencer']); // Rediriger vers la page de connexion après l'inscription
-        }
-      else{
-        this.router.navigate(['/authentication/login']); // Rediriger vers la page de connexion après l'inscription
-
-      }
-      },
+          this.router.navigate(['/authentication/login']); // Rediriger vers la page de connexion après l'inscription
+        },
         error => {
           console.error('Erreur lors de l\'inscription', error);
           alert('Erreur lors de l\'inscription');
@@ -88,7 +79,6 @@ export class AppSideRegisterComponent {
       );
     }
   }
-
 
 
 }
